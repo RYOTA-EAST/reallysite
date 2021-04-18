@@ -13,6 +13,15 @@
         <a class="p-2 link-secondary" href="/blog/">ブログ</a>
         <a class="p-2 link-secondary" href="#">お問い合わせ</a>
         <a class="p-2 link-secondary" href="#">メニュー３</a>
+
+        {% if user.is_authenticated %}
+          <a href="/logout/" class="p-2 link-secondary">ログアウト</a>
+        {% else %}
+          <div>
+            <a href="/login/" class="p-2 link-secondary">ログイン</a>
+            <a href="/signup/" class="btn btn-outline-info">新規登録</a>
+          </div>
+        {% endif %}
     </nav>
   </div>
 </div>
