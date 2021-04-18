@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.views import LoginView
 from blog.models import Article
 
 def index(request):
@@ -9,3 +10,6 @@ def index(request):
     'articles': objs,
   }
   return render(request, 'mysite/index.html', context)
+
+class Login(LoginView):
+  template_name = 'mysite/login.html'
