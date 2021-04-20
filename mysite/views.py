@@ -35,3 +35,7 @@ def signup(request):
       messages.success(request, '登録完了！！！')
       return redirect('/')
   return render(request, 'mysite/auth.html', context)
+
+def mypage(request):
+  context = {}
+  return render(request, 'mysite/mypage.html',context)
