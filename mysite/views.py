@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.views import LoginView
 from blog.models import Article
-from mysite.forms import UserCreationForm
+from mysite.forms import UserCreationForm, ProfileForm
 from django.contrib import messages
 
 def index(request):
@@ -38,4 +38,12 @@ def signup(request):
 
 def mypage(request):
   context = {}
+  if request.method == 'POST':
+    form = ProfileForm(request.POST)
+    if form.is_valid():
+      profile = form.save(commit=False)
+      profile.user = request.user
+      profile.save()
+      messages.success(request, '更新完了！！！')
+
   return render(request, 'mysite/mypage.html',context)
