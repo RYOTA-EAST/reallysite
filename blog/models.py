@@ -7,6 +7,7 @@ class Article(models.Model):
   author = models.CharField(default="", max_length=30)
   created_at = models.DateField(auto_now_add=True)
   updated_at = models.DateField(auto_now=True)
+  count = models.IntegerField(default=0)
 class Comment(models.Model):
   comment = models.TextField(default="", max_length=500)
 
