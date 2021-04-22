@@ -17,12 +17,16 @@ def index(request):
 def article(request, pk):
   obj = Article.objects.get(pk=pk)
   if request.method == 'POST':
-    form = CommentForm(request.POST)
-    if form.is_valid():
-      comment = form.save(commit=False)
-      comment.user = request.user
-      comment.article = obj
-      comment.save()
+    if request.method == 'POST':
+      obj.count += 1
+      obj.save()
+    else:
+      form = CommentForm(request.POST)
+      if form.is_valid():
+        comment = form.save(commit=False)
+        comment.user = request.user
+        comment.article = obj
+        comment.save()
   comments = Comment.objects.filter(article=obj)
   context = {
     'article': obj,
