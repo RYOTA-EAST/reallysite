@@ -1,9 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
-from mysite.models import User
+from mysite.models.account_models import User
+from mysite.models.profile_models import Profile
+
+class ProfileInline(admin.StackedInline):
+  model = Profile
+  can_delete = False
 
 class CustomUserAdmin(UserAdmin):
+  inlines = (ProfileInline,)
   fieldsets = (
     (None,{
       'fields':(
