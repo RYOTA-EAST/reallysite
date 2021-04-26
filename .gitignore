@@ -168,3 +168,5 @@ mysite/__pycache__/views.cpython-36.pyc
 secrets/secret_dev.yaml
 /mysite/__pycache__
 /blog/__pycache__
+secrets/secret.yaml
+secrets/cloud_sql_proxy
