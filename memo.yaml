@@ -1,0 +1,6 @@
+venvで仮想環境構築
+source venv/bin/activate
+
+deactivate
+
+./secrets/cloud_sql_proxy -instances=reallysiteeast:us-central1:reallysiteeast-instance=tcp:3307
