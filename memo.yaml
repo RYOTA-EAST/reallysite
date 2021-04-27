@@ -4,3 +4,9 @@ source venv/bin/activate
 deactivate
 
 ./secrets/cloud_sql_proxy -instances=reallysiteeast:us-central1:reallysiteeast-instance=tcp:3307
+
+
+# 静的ファイルを集める
+
+# GAEにデプロイする
+gcloud app deploy --project reallysiteeast 

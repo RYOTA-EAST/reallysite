@@ -170,3 +170,4 @@ secrets/secret_dev.yaml
 /blog/__pycache__
 secrets/secret.yaml
 secrets/cloud_sql_proxy
+memo.yaml
