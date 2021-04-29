@@ -4,7 +4,7 @@ import os
 
 def upload_image_to(instance, filename):
   user_id = str(instance.user.id)
-  return os.path.join('static', 'image', user_id, filename)
+  return os.path.join('image', user_id, filename)
 
 class Profile(models.Model):
   user = models.OneToOneField(get_user_model(), unique=True, on_delete=models.CASCADE, primary_key=True)
