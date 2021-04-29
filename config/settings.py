@@ -20,9 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(cemm+z(-ww1rwrm@(%1*#)*(s4o^u58l20oxz+&6!3=eil1w5'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 if os.getenv('GAE_APPLICATION', None):
@@ -37,6 +34,9 @@ else:
         objs = yaml.safe_load(file)
         for obj in objs:
             os.environ[obj] = objs[obj]
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # Application definition
 
