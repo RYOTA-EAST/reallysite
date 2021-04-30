@@ -44,6 +44,25 @@ def signup(request):
       return redirect('/')
   return render(request, 'mysite/auth.html', context)
 
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class MypageView(LoginRequiredMixin, View):
+  context = {}
+  
+  def get(self, request):
+    return render(request, 'mysite/mypage.html',self.context)
+
+  def post(self, request):
+    form = ProfileForm(request.POST, request.FILES)
+    if form.is_valid():
+      profile = form.save(commit=False)
+      profile.user = request.user
+      profile.save()
+      messages.success(request, '更新完了！！！')
+    return render(request, 'mysite/mypage.html',self.context)
+
+'''
 @login_required
 def mypage(request):
   context = {}
@@ -56,7 +75,43 @@ def mypage(request):
       messages.success(request, '更新完了！！！')
 
   return render(request, 'mysite/mypage.html',context)
+'''
 
+class ContactView(View):
+  context = {
+    'grecaptcha_sitekey': os.environ['GRECAPTCHA_SITEKEY'],
+  }
+
+  def get(self, request):
+    return render(request, 'mysite/contact.html', self.context)
+
+  def post(self, request):
+    recaptcha_token = request.POST.get("grecaptcha_response")
+    res = grecaptcha_request(recaptcha_token)
+
+    if not res:
+      messages.error(request, 'reCAPTCHAに失敗したようです。')
+      return render(request, 'mysite/contact.html', self.context)
+
+    subject = 'お問い合わせがありました'
+    message = """お問い合わせがありました\n名前：{}\nメールアドレス：{}\n内容：{}""".format(
+      request.POST.get('name'),
+      request.POST.get('email'),
+      request.POST.get('content'))
+    email_from = os.environ['DEFAULT_EMAIL_FROM'] 
+    email_to = [
+      os.environ['DEFAULT_EMAIL_FROM'],
+    ]
+    send_mail(
+      subject,
+      message,
+      email_from,
+      email_to
+    )
+    messages.success(request, 'お問い合わせありがとうございました')
+    return render(request, 'mysite/contact.html', self.context)
+
+'''
 def contact(request):
   context = {
     'grecaptcha_sitekey': os.environ['GRECAPTCHA_SITEKEY'],
@@ -86,6 +141,7 @@ def contact(request):
     )
     messages.success(request, 'お問い合わせありがとうございました')
   return render(request, 'mysite/contact.html', context)
+'''
 
 def grecaptcha_request(token):
   from urllib import request, parse
