@@ -160,11 +160,9 @@ Thumbs.db
 
 
 # End of https://www.toptal.com/developers/gitignore/api/django
-blog/__pycache__/admin.cpython-36.pyc
-blog/__pycache__/models.cpython-36.pyc
-blog/__pycache__/urls.cpython-36.pyc
-blog/__pycache__/views.cpython-36.pyc
-mysite/__pycache__/views.cpython-36.pyc
+blog/__pycache__/
+mysite/__pycache__/
+config/__pycache__/
 secrets/secret_dev.yaml
 /mysite/__pycache__
 /blog/__pycache__
