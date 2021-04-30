@@ -27,4 +27,5 @@ urlpatterns = [
     path('signup/', views.signup),
     path('mypage/', views.MypageView.as_view()),
     path('contact/', views.ContactView.as_view()),
+    path('pay/', views.PayView.as_view()),
 ]
