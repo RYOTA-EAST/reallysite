@@ -4,5 +4,6 @@
     "mypage",
     "mysite",
     "signup"
-  ]
+  ],
+  "python.pythonPath": "/Users/ryotahigashi/projects/reallysite/venv/bin/python3"
 }
