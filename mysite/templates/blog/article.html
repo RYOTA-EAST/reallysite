@@ -1,17 +1,21 @@
 {% extends 'mysite/base.html' %}
 
+{% load cache %}
 {% block content %}
 
 <main class="container">
     <div class="row">
         <div class="col-md-8">
-            <h3 class="font-italic border-bottom display-4">
-                {{ article.title }}
-            </h3>
-            <p class="small text-muted text-right">{{ article.created_at }} {{ article.author }}</p>
-            <div class="my-5">
-                <p>{{ article.text }}</p>
-            </div>
+
+            {% cache 604800 article article.id %}
+                <h3 class="font-italic border-bottom display-4">
+                    {{ article.title }}
+                </h3>
+                <p class="small text-muted text-right">{{ article.created_at }} {{ article.author }}</p>
+                <div class="my-5">
+                    <p>{{ article.text }}</p>
+                </div>
+            {% endcache %}
 
             <div>
                 {% include 'mysite/snippets/like_count.html' %}
