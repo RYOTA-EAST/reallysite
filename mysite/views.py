@@ -9,11 +9,21 @@ from django.contrib.auth import login
 from django.core.mail import send_mail
 import os
 
+def landing(request):
+  ranks = Article.objects.order_by('-count')[:3]
+  objs = Article.objects.all()[:3]
+  context = {
+    'title': 'Really Site',
+    'articles': objs,
+    'ranks': ranks,
+  }
+  return render(request, 'mysite/landing.html', context)
+
 def index(request):
   ranks = Article.objects.order_by('-count')[:2]
   objs = Article.objects.all()[:3]
   context = {
-    'title': 'Rrally Site',
+    'title': 'Really Site',
     'articles': objs,
     'ranks': ranks,
   }
