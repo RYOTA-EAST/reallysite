@@ -9,6 +9,17 @@ from django.contrib.auth import login
 from django.core.mail import send_mail
 import os
 
+from django.contrib.sitemaps import ping_google
+
+@login_required
+def ping(request):
+  try:
+    if request.user.is_admin:
+      ping_google()
+  except:
+    pass
+  return redirect('/')
+
 def landing(request):
   ranks = Article.objects.order_by('-count')[:3]
   objs = Article.objects.all()[:3]
